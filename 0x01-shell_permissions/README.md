@@ -1,1 +1,1 @@
-My shell permissions directory
+Write a script that prints the effective username of the current user.
