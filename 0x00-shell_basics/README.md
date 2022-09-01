@@ -1,1 +1,1 @@
-My ALX day-1 shell_basics
+current directory contents in a long format
