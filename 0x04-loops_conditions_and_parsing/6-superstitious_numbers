@@ -1,17 +1,25 @@
 #!/usr/bin/env bash
-#while case stuff
+#while case statements
 
 count=1
-while [ $count -ne 21 ]
+while [ $count -le 20 ]
 do
-    echo $count
-    case "$count" in
-	4)  echo "bad luck from China"
-	    ;;
-	9) echo "bad luck from Japan"
-	    ;;
-	17) echo "bad luck from Italy"
-	    ;;
-	esac
-    ((count++))
+  case $count in
+    4)
+      echo "4"
+      echo "Bad luck from China"
+      ;;
+    9)
+      echo "9"
+      echo "Bad luck from Japan"
+      ;;
+    17)
+      echo "17"
+      echo "Bad luck from Italy"
+      ;;
+    *)
+      echo $count
+      ;;
+  esac
+  count=$((count + 1))
 done
