@@ -12,6 +12,3 @@ for i in {1..100}; do
     echo "- $i"
   fi
 done
-This script uses a for loop to iterate from 1 to 100 (for i in {1..100}). For each iteration, the script checks if the number is a multiple of 15 (if [ $((i % 15)) -eq 0 ]
-
-
