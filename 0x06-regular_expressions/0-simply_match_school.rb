@@ -12,4 +12,3 @@ if arg =~ pattern
 else
   puts "#{arg} does not match the pattern #{pattern}"
 end
-
