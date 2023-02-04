@@ -1,3 +1,14 @@
-#!/usr/bin/env bash
-# display all active IPv4 IPs on the current machine
-ifconfig | grep "inet " | cut -d ':' -f2 | cut -d' ' -f1
+#!/bin/bash
+
+# Get all the network interfaces
+interfaces=$(ifconfig | grep -Eo '^[^\t:]+')
+
+# Iterate through each interface and get its IPv4 address
+for interface in $interfaces; do
+  ip=$(ifconfig $interface | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
+
+  # If the interface has an IPv4 address, print it
+  if [ -n "$ip" ]; then
+    echo $ip
+  fi
+done
