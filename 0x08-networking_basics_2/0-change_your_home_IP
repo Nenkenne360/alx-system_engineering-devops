@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+# This script configures an Ubuntu server to resolve localhost to 127.0.0.2 and facebook.com to 8.8.8.8
+
 # Create backup of existing /etc/hosts file
 sudo cp /etc/hosts /etc/hosts.bak
 
@@ -10,3 +13,5 @@ echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts
 
 # Restart the Docker service for changes to take effect
 sudo service docker restart
+
+# End of script
