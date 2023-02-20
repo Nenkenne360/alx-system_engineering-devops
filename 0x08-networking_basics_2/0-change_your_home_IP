@@ -1,14 +1,17 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Get all the network interfaces
-interfaces=$(ifconfig | grep -Eo '^[^\t:]+')
+# This script configures an Ubuntu server to resolve localhost to 127.0.0.2 and facebook.com to 8.8.8.8
 
-# Iterate through each interface and get its IPv4 address
-for interface in $interfaces; do
-  ip=$(ifconfig $interface | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
+# Create backup of existing /etc/hosts file
+sudo cp /etc/hosts /etc/hosts.bak
 
-  # If the interface has an IPv4 address, print it
-  if [ -n "$ip" ]; then
-    echo $ip
-  fi
-done
+# Add localhost resolution to 127.0.0.2
+echo "127.0.0.2 localhost" | sudo tee -a /etc/hosts
+
+# Add facebook.com resolution to 8.8.8.8
+echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts
+
+# Restart the Docker service for changes to take effect
+sudo service docker restart
+
+# End of script
