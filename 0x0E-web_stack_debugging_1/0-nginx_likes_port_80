@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# This script fix nginx configuration file in an Ubuntu container so that nginx listens on port 80.
+#This script fix nginx configuration file in an Ubuntu container so that nginx listens on port 80.
 
 new="80 default_server"
 old="8080 default_server"
