@@ -2,15 +2,22 @@
 # Takes a subdomain and a domain and returns information about the subdomain
 
 print_info () {
-    dig "$1" | grep -A1 'ANSWER SECTION:' | sed -r "s/$1./$2/g" | awk -F" " ' NR==2 { print "The subdomain " $1 " is a " $4 " record and points to " $5 }'
+    local subdomain="$1"
+    local domain="$2"
+    dig "$subdomain.$domain" | grep -A1 'ANSWER SECTION:' | awk -F'[ \t]+' 'NR==2 { print "The subdomain " $1 " is a " $4 " record and points to " $5 }'
 }
 
 if [ "$#" -eq 2 ]
 then
-    print_info "$2.$1" "$2"
+    print_info "$2" "$1"
+elif [ "$#" -eq 1 ]
+then
+    print_info "www" "$1"
+    print_info "lb-01" "$1"
+    print_info "web-01" "$1"
+    print_info "web-02" "$1"
 else
-    print_info "www.$1" "www"
-    print_info "lb-01.$1" "lb-01"
-    print_info "web-01.$1" "web-01"
-    print_info "web-02.$1" "web-02"
+    echo "Usage: $0 <domain> [subdomain]"
+    exit 1
 fi
+
